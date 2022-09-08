@@ -158,4 +158,29 @@ object CollectionIntrinsics {
     fun contains(src: Array<Any>, element: Any?): Boolean {
         return element in src
     }
+
+    @JvmStatic
+    fun emptyObjectArray(): Array<Any?> {
+        return emptyArray();
+    }
+
+    @JvmStatic
+    fun <T> arrayCopyAndGrow(src: Array<T>, growSize: Int): Array<T> {
+        return src
+    }
+
+    @JvmStatic
+    fun <T> arrayCopyAndTrim(src: Array<T>, trimSize: Int): Array<T> {
+        return src
+    }
+
+    @JvmStatic
+    fun <T> arrayCopyAndShiftRight(src: Array<T>, shiftStartIndex: Int, shiftSize: Int): Array<T> {
+        return src
+    }
+
+    @JvmStatic
+    fun <T> arrayCopyAndShiftLeft(src: Array<T>, shiftStartIndex: Int, shiftSize: Int): Array<T> {
+        return src
+    }
 }
