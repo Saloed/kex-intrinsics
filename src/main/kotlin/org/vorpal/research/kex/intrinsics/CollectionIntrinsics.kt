@@ -165,22 +165,30 @@ object CollectionIntrinsics {
     }
 
     @JvmStatic
-    fun <T> arrayCopyAndGrow(src: Array<T>, growSize: Int): Array<T> {
-        return src
+    fun <T> arrayCopyAndGrow(src: Array<T>, growSize: Int): Array<T?> {
+        return src.copyOf(src.size + growSize)
     }
 
     @JvmStatic
-    fun <T> arrayCopyAndTrim(src: Array<T>, trimSize: Int): Array<T> {
-        return src
+    fun <T> arrayCopyAndTrim(src: Array<T>, trimSize: Int): Array<T?> {
+        return src.copyOf(src.size - trimSize)
     }
 
     @JvmStatic
-    fun <T> arrayCopyAndShiftRight(src: Array<T>, shiftStartIndex: Int, shiftSize: Int): Array<T> {
-        return src
+    fun <T> arrayCopyAndShiftRight(src: Array<T>, shiftStartIndex: Int, shiftSize: Int): Array<T?> {
+        val result = arrayCopyAndGrow(src, shiftSize)
+        for (i in shiftStartIndex until src.size) {
+            result[i + shiftSize] = src[i]
+        }
+        return result
     }
 
     @JvmStatic
-    fun <T> arrayCopyAndShiftLeft(src: Array<T>, shiftStartIndex: Int, shiftSize: Int): Array<T> {
-        return src
+    fun <T> arrayCopyAndShiftLeft(src: Array<T>, shiftStartIndex: Int, shiftSize: Int): Array<T?> {
+        val result = arrayCopyAndTrim(src, shiftSize)
+        for (i in shiftStartIndex until result.size) {
+            result[i] = src[i + shiftSize]
+        }
+        return result
     }
 }
