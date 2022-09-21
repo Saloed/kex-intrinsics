@@ -49,4 +49,16 @@ object AssertIntrinsics {
      */
     @JvmStatic
     inline fun kexUnreachable(id: String, condition: Boolean) {}
+
+    @JvmStatic
+    fun kexCheckNotNull(value: Any?) {
+        if (value == null) throw NullPointerException()
+    }
+
+    @JvmStatic
+    fun kexCheckArrayBounds(index: Int, length: Int) {
+        if (index < 0 || index >= length) {
+            throw IndexOutOfBoundsException()
+        }
+    }
 }
